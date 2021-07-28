@@ -1,3 +1,12 @@
+drop schema if exists nexus;
+create database nexus character set utf8mb4 collate utf8mb4_unicode_ci;
+-- ------------------------------------------------------
+use `nexus`;
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+
 -- ----------------------------
 -- 1、部门表
 -- ----------------------------
