@@ -319,7 +319,6 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
         return list;
     }
-
     /**
      * 查找指定字符串是否包含指定字符串列表中的任意一个字符串同时串忽略大小写
      *
@@ -342,6 +341,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
         }
         return false;
     }
+
 
     /**
      * 驼峰转下划线命名
