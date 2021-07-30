@@ -31,7 +31,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 查询部门管理数据
-     * 
+     *
      * @param dept 部门信息
      * @return 部门信息集合
      */
@@ -44,7 +44,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 查询部门管理树
-     * 
+     *
      * @param dept 部门信息
      * @return 所有部门信息
      */
@@ -59,7 +59,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 查询部门管理树（排除下级）
-     * 
+     *
      * @param deptId 部门ID
      * @return 所有部门信息
      */
@@ -72,7 +72,7 @@ public class SysDeptServiceImpl implements ISysDeptService
         Iterator<SysDept> it = deptList.iterator();
         while (it.hasNext())
         {
-            SysDept d = (SysDept) it.next();
+            SysDept d = it.next();
             if (d.getDeptId().intValue() == deptId
                     || ArrayUtils.contains(StringUtils.split(d.getAncestors(), ","), deptId + ""))
             {
@@ -151,7 +151,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 查询部门人数
-     * 
+     *
      * @param parentId 部门ID
      * @return 结果
      */
@@ -165,7 +165,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 查询部门是否存在用户
-     * 
+     *
      * @param deptId 部门ID
      * @return 结果 true 存在 false 不存在
      */
@@ -173,12 +173,12 @@ public class SysDeptServiceImpl implements ISysDeptService
     public boolean checkDeptExistUser(Long deptId)
     {
         int result = deptMapper.checkDeptExistUser(deptId);
-        return result > 0 ? true : false;
+        return result > 0;
     }
 
     /**
      * 删除部门管理信息
-     * 
+     *
      * @param deptId 部门ID
      * @return 结果
      */
@@ -190,7 +190,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 新增保存部门信息
-     * 
+     *
      * @param dept 部门信息
      * @return 结果
      */
@@ -209,7 +209,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 修改保存部门信息
-     * 
+     *
      * @param dept 部门信息
      * @return 结果
      */
@@ -227,7 +227,8 @@ public class SysDeptServiceImpl implements ISysDeptService
             updateDeptChildren(dept.getDeptId(), newAncestors, oldAncestors);
         }
         int result = deptMapper.updateDept(dept);
-        if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()) && StringUtils.isNotEmpty(dept.getAncestors()))
+        if (UserConstants.DEPT_NORMAL.equals(dept.getStatus()) && StringUtils.isNotEmpty(dept.getAncestors())
+                && !StringUtils.equals("0", dept.getAncestors()))
         {
             // 如果该部门是启用状态，则启用该部门的所有上级部门
             updateParentDeptStatusNormal(dept);
@@ -237,7 +238,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 修改该部门的父级部门状态
-     * 
+     *
      * @param dept 当前部门
      */
     private void updateParentDeptStatusNormal(SysDept dept)
@@ -249,7 +250,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 修改子元素关系
-     * 
+     *
      * @param deptId 被修改的部门ID
      * @param newAncestors 新的父ID集合
      * @param oldAncestors 旧的父ID集合
@@ -269,7 +270,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 根据部门ID查询信息
-     * 
+     *
      * @param deptId 部门ID
      * @return 部门信息
      */
@@ -281,7 +282,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 根据ID查询所有子部门（正常状态）
-     * 
+     *
      * @param deptId 部门ID
      * @return 子部门数
      */
@@ -293,7 +294,7 @@ public class SysDeptServiceImpl implements ISysDeptService
 
     /**
      * 校验部门名称是否唯一
-     * 
+     *
      * @param dept 部门信息
      * @return 结果
      */
