@@ -1,8 +1,10 @@
 package com.magi.common.utils;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
+
+import com.magi.common.constant.Constants;
 import com.magi.common.core.text.StrFormatter;
+import org.springframework.util.AntPathMatcher;
 
 /**
  * 字符串工具类
@@ -19,7 +21,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * 获取参数不为空值
-     * 
+     *
      * @param value defaultValue 要判断的value
      * @return value 返回值
      */
@@ -30,7 +32,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个Collection是否为空， 包含List，Set，Queue
-     * 
+     *
      * @param coll 要判断的Collection
      * @return true：为空 false：非空
      */
@@ -41,7 +43,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个Collection是否非空，包含List，Set，Queue
-     * 
+     *
      * @param coll 要判断的Collection
      * @return true：非空 false：空
      */
@@ -52,7 +54,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个对象数组是否为空
-     * 
+     *
      * @param objects 要判断的对象数组
      ** @return true：为空 false：非空
      */
@@ -63,7 +65,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个对象数组是否非空
-     * 
+     *
      * @param objects 要判断的对象数组
      * @return true：非空 false：空
      */
@@ -74,7 +76,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个Map是否为空
-     * 
+     *
      * @param map 要判断的Map
      * @return true：为空 false：非空
      */
@@ -85,7 +87,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个Map是否为空
-     * 
+     *
      * @param map 要判断的Map
      * @return true：非空 false：空
      */
@@ -96,7 +98,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个字符串是否为空串
-     * 
+     *
      * @param str String
      * @return true：为空 false：非空
      */
@@ -107,7 +109,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个字符串是否为非空串
-     * 
+     *
      * @param str String
      * @return true：非空串 false：空串
      */
@@ -118,7 +120,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个对象是否为空
-     * 
+     *
      * @param object Object
      * @return true：为空 false：非空
      */
@@ -129,7 +131,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个对象是否非空
-     * 
+     *
      * @param object Object
      * @return true：非空 false：空
      */
@@ -140,7 +142,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * * 判断一个对象是否是数组类型（Java基本型别的数组）
-     * 
+     *
      * @param object 对象
      * @return true：是数组 false：不是数组
      */
@@ -159,7 +161,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * 截取字符串
-     * 
+     *
      * @param str 字符串
      * @param start 开始
      * @return 结果
@@ -190,7 +192,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * 截取字符串
-     * 
+     *
      * @param str 字符串
      * @param start 开始
      * @param end 结束
@@ -242,7 +244,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
      * 通常使用：format("this is {} for {}", "a", "b") -> this is a for b<br>
      * 转义{}： format("this is \\{} for {}", "a", "b") -> this is \{} for a<br>
      * 转义\： format("this is \\\\{} for {}", "a", "b") -> this is \a for b<br>
-     * 
+     *
      * @param template 文本模板，被替换的部分用 {} 表示
      * @param params 参数值
      * @return 格式化后的文本
@@ -254,6 +256,91 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
             return template;
         }
         return StrFormatter.format(template, params);
+    }
+
+    /**
+     * 是否为http(s)://开头
+     *
+     * @param link 链接
+     * @return 结果
+     */
+    public static boolean ishttp(String link)
+    {
+        return StringUtils.startsWithAny(link, Constants.HTTP, Constants.HTTPS);
+    }
+
+    /**
+     * 字符串转set
+     *
+     * @param str 字符串
+     * @param sep 分隔符
+     * @return set集合
+     */
+    public static final Set<String> str2Set(String str, String sep)
+    {
+        return new HashSet<String>(str2List(str, sep, true, false));
+    }
+
+    /**
+     * 字符串转list
+     *
+     * @param str 字符串
+     * @param sep 分隔符
+     * @param filterBlank 过滤纯空白
+     * @param trim 去掉首尾空白
+     * @return list集合
+     */
+    public static final List<String> str2List(String str, String sep, boolean filterBlank, boolean trim)
+    {
+        List<String> list = new ArrayList<String>();
+        if (StringUtils.isEmpty(str))
+        {
+            return list;
+        }
+
+        // 过滤空白字符串
+        if (filterBlank && StringUtils.isBlank(str))
+        {
+            return list;
+        }
+        String[] split = str.split(sep);
+        for (String string : split)
+        {
+            if (filterBlank && StringUtils.isBlank(string))
+            {
+                continue;
+            }
+            if (trim)
+            {
+                string = string.trim();
+            }
+            list.add(string);
+        }
+
+        return list;
+    }
+
+    /**
+     * 查找指定字符串是否包含指定字符串列表中的任意一个字符串同时串忽略大小写
+     *
+     * @param cs 指定字符串
+     * @param searchCharSequences 需要检查的字符串数组
+     * @return 是否包含任意一个字符串
+     */
+    public static boolean containsAnyIgnoreCase(CharSequence cs, CharSequence... searchCharSequences)
+    {
+        if (isEmpty(cs) || isEmpty(searchCharSequences))
+        {
+            return false;
+        }
+        for (CharSequence testStr : searchCharSequences)
+        {
+            if (containsIgnoreCase(cs, testStr))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -301,12 +388,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
             }
             sb.append(Character.toLowerCase(c));
         }
+
         return sb.toString();
     }
 
     /**
      * 是否包含字符串
-     * 
+     *
      * @param str 验证字符串
      * @param strs 字符串组
      * @return 包含返回true
@@ -328,7 +416,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
 
     /**
      * 将下划线大写方式命名的字符串转换为驼峰式。如果转换前的下划线大写方式命名的字符串为空，则返回空字符串。 例如：HELLO_WORLD->HelloWorld
-     * 
+     *
      * @param name 转换前的下划线大写方式命名的字符串
      * @return 转换后的驼峰式命名的字符串
      */
@@ -398,6 +486,45 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * 查找指定字符串是否匹配指定字符串列表中的任意一个字符串
+     *
+     * @param str 指定字符串
+     * @param strs 需要检查的字符串数组
+     * @return 是否匹配
+     */
+    public static boolean matches(String str, List<String> strs)
+    {
+        if (isEmpty(str) || isEmpty(strs))
+        {
+            return false;
+        }
+        for (String pattern : strs)
+        {
+            if (isMatch(pattern, str))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断url是否与规则配置:
+     * ? 表示单个字符;
+     * * 表示一层路径内的任意字符串，不可跨层级;
+     * ** 表示任意层路径;
+     *
+     * @param pattern 匹配规则
+     * @param url 需要匹配的url
+     * @return
+     */
+    public static boolean isMatch(String pattern, String url)
+    {
+        AntPathMatcher matcher = new AntPathMatcher();
+        return matcher.match(pattern, url);
     }
 
     @SuppressWarnings("unchecked")
