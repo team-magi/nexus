@@ -102,7 +102,7 @@ public class CommonController {
      * @param fileName 文件名称
      * @param delete   是否删除
      */
-//    @GetMapping("common/download")
+    @GetMapping("common/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request) {
         try {
             if (!FileUtils.checkAllowDownload(fileName)) {
@@ -125,7 +125,7 @@ public class CommonController {
     /**
      * 本地资源通用下载
      */
-//    @GetMapping("/common/download/resource")
+    @GetMapping("/common/download/resource")
     public void resourceDownload(String resource, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         try {
