@@ -5,15 +5,23 @@
     <parent>
         <artifactId>nexus</artifactId>
         <groupId>com.magi</groupId>
-        <version>4.6.2</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>nexus-bsc</artifactId>
+    <artifactId>nexus-nft</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+    <dependencies>
 
+        <!-- 通用工具-->
+        <dependency>
+            <groupId>com.magi</groupId>
+            <artifactId>nexus-common</artifactId>
+        </dependency>
+
+    </dependencies>
 </project>

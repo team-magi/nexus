@@ -14,7 +14,7 @@
     <link th:href="@{/css/animate.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/skins.css?v=20200902}" rel="stylesheet"/>
-    <link th:href="@{/nexus/css/ry-ui.css?v=4.6.2}" rel="stylesheet"/>
+    <link th:href="@{/nexus/css/ry-ui.css?v=1.0.0}" rel="stylesheet"/>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <div id="wrapper">
@@ -243,10 +243,15 @@
 				</div>
                 <!-- 右侧栏 -->
                 <ul class="nav navbar-top-links navbar-right welcome-message">
-                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="开发文档" href="http://doc.nexus.vip/nexus" target="_blank"><i class="fa fa-question-circle"></i> 文档</a></li>
-                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="#" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>
-	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="#" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>
-                
+<!--                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="开发文档" href="http://doc.nexus.vip/nexus" target="_blank"><i class="fa fa-question-circle"></i> 文档</a></li>-->
+<!--                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="锁定屏幕" href="#" id="lockScreen"><i class="fa fa-lock"></i> 锁屏</a></li>-->
+<!--	                <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="全屏显示" href="#" id="fullScreen"><i class="fa fa-arrows-alt"></i> 全屏</a></li>-->
+                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Lock screen" href="#"
+                           id="lockScreen"><i class="fa fa-lock"></i> Lock screen</a></li>
+                    <li><a data-toggle="tooltip" data-trigger="hover" data-placement="bottom" title="Full screen display" href="#"
+                           id="fullScreen"><i class="fa fa-arrows-alt"></i> Full screen</a></li>
+
+
                     <li class="dropdown user-menu">
 						<a href="javascript:void(0)" class="dropdown-toggle" data-hover="dropdown">
 							<img th:src="(${#strings.isEmpty(user.avatar)}) ? @{/img/profile.jpg} : @{${user.avatar}}" th:onerror="this.src='img/profile.jpg'" class="user-image">
@@ -300,7 +305,7 @@
             <iframe class="nexus_iframe" name="iframe0" width="100%" height="100%" th:data-id="@{/system/main}"
                     th:src="@{/system/main}" frameborder="0" seamless></iframe>
         </div>
-        
+
         <div th:if="${ignoreFooter}" class="footer">
             <div class="pull-right">© [[${copyrightYear}]] nexus Copyright </div>
         </div>
@@ -315,8 +320,8 @@
 <script th:src="@{/js/jquery.contextMenu.min.js}"></script>
 <script th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
 <script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
-<script th:src="@{/nexus/js/ry-ui.js?v=4.6.2}"></script>
-<script th:src="@{/nexus/js/common.js?v=4.6.2}"></script>
+<script th:src="@{/nexus/js/ry-ui.js?v=1.0.0}"></script>
+<script th:src="@{/nexus/js/common.js?v=1.0.0}"></script>
 <script th:src="@{/nexus/index.js?v=20201208}"></script>
 <script th:src="@{/ajax/libs/fullscreen/jquery.fullscreen.js}"></script>
 <script th:src="@{/js/resize-tabs.js}"></script>

@@ -98,14 +98,16 @@ public class SysIndexController extends BaseController
         SysUser user = ShiroUtils.getSysUser();
         if (StringUtils.isNull(user))
         {
-            return AjaxResult.error("服务器超时，请重新登陆");
+//            return AjaxResult.error("服务器超时，请重新登陆");
+            return AjaxResult.error("Server timed out, please log in again");
         }
         if (passwordService.matches(user, password))
         {
             ServletUtils.getSession().removeAttribute(ShiroConstants.LOCK_SCREEN);
             return AjaxResult.success();
         }
-        return AjaxResult.error("密码不正确，请重新输入。");
+//        return AjaxResult.error("密码不正确，请重新输入。");
+        return AjaxResult.error("The password is incorrect, please re-enter");
     }
 
     // 切换主题
@@ -127,7 +129,8 @@ public class SysIndexController extends BaseController
     public String main(ModelMap mmap)
     {
         mmap.put("version", NexusConfig.getVersion());
-        return "main_v1";
+//        return "main_v1";
+        return "nft/list/list";
     }
 
     // 检查初始密码是否提醒修改

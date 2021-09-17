@@ -9,7 +9,7 @@
     <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
     <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
     <link href="../static/css/login.min.css" th:href="@{/css/login.min.css}" rel="stylesheet"/>
-    <link href="../static/nexus/css/ry-ui.css" th:href="@{/nexus/css/ry-ui.css?v=4.6.2}" rel="stylesheet"/>
+    <link href="../static/nexus/css/ry-ui.css" th:href="@{/nexus/css/ry-ui.css?v=1.0.0}" rel="stylesheet"/>
     <!-- 360浏览器急速模式 -->
     <meta name="renderer" content="webkit">
     <!-- 避免IE使用兼容模式 -->
@@ -20,7 +20,8 @@
     }</style>
     <script>
         if (window.top !== window.self) {
-            alert('未登录或登录超时。请重新登录');
+            // alert('未登录或登录超时。请重新登录');
+            alert('Not logged in or timed out. Please log in again');
             window.top.location = window.location
         }
         ;
@@ -35,38 +36,39 @@
                     <!--                        <h1><img alt="[ Nexus ]" src="../static/nexus.png" th:src="@{/nexus.png}"></h1>-->
                 </div>
                 <div class="m-b"></div>
-                <h4>欢迎使用 <strong>Nexus 后台管理系统</strong></h4>
-                <ul class="m-b">
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> SpringBoot</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Mybatis</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Shiro</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Thymeleaf</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Bootstrap</li>
-                </ul>
+                <h4>Welcome to <strong>Nexus</strong></h4>
+<!--                <ul class="m-b">-->
+<!--                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> SpringBoot</li>-->
+<!--                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Mybatis</li>-->
+<!--                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Shiro</li>-->
+<!--                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Thymeleaf</li>-->
+<!--                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> Bootstrap</li>-->
+<!--                </ul>-->
                 <strong th:if="${@config.getKey('sys.account.registerUser')}">还没有账号？ <a th:href="@{/register}">立即注册&raquo;</a></strong>
             </div>
         </div>
         <div class="col-sm-5">
             <form id="signupForm" autocomplete="off">
-                <h4 class="no-margins">登录：</h4>
-                <input type="text" name="username" class="form-control uname" placeholder="用户名" value="admin"/>
-                <input type="password" name="password" class="form-control pword" placeholder="密码" value="admin123"/>
+                <h4 class="no-margins">Sign In：</h4>
+                <input type="text" name="username" class="form-control uname" placeholder="User name" value="17819816654"/>
+                <input type="password" name="password" class="form-control pword" placeholder="Password" value="12345"/>
                 <div class="row m-t" th:if="${captchaEnabled==true}">
                     <div class="col-xs-6">
-                        <input type="text" name="validateCode" class="form-control code" placeholder="验证码"
+                        <input type="text" name="validateCode" class="form-control code" placeholder="Security code"
                                maxlength="5"/>
                     </div>
                     <div class="col-xs-6">
-                        <a href="javascript:void(0);" title="点击更换验证码">
+                        <a href="javascript:void(0);" title="Click to replace the verification code">
                             <img th:src="@{/captcha/captchaImage(type=${captchaType})}" class="imgcode" width="85%"/>
                         </a>
                     </div>
                 </div>
                 <div class="checkbox-custom" th:classappend="${captchaEnabled==false} ? 'm-t'">
-                    <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">记住我</label>
+                    <input type="checkbox" id="rememberme" name="rememberme"> <label for="rememberme">Remember me</label>
                 </div>
-                <button class="btn btn-success btn-block" id="btnSubmit" data-loading="正在验证登录，请稍后...">登录</button>
+                <button class="btn btn-success btn-block" id="btnSubmit" data-loading="Verifying login, please wait...">Sign In</button>
             </form>
+
         </div>
     </div>
     <div class="signup-footer">
@@ -88,7 +90,7 @@
         th:src="@{/ajax/libs/validate/messages_zh.min.js}"></script>
 <script src="../static/ajax/libs/layer/layer.min.js" th:src="@{/ajax/libs/layer/layer.min.js}"></script>
 <script src="../static/ajax/libs/blockUI/jquery.blockUI.js" th:src="@{/ajax/libs/blockUI/jquery.blockUI.js}"></script>
-<script src="../static/nexus/js/ry-ui.js" th:src="@{/nexus/js/ry-ui.js?v=4.6.2}"></script>
+<script src="../static/nexus/js/ry-ui.js" th:src="@{/nexus/js/ry-ui.js?v=1.0.0}"></script>
 <script src="../static/nexus/login.js" th:src="@{/nexus/login.js}"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <parent>
         <artifactId>nexus</artifactId>
         <groupId>com.magi</groupId>
-        <version>4.6.2</version>
+        <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,8 +17,8 @@
 
     <dependencies>
 
-         <!-- SpringBoot Web容器 -->
-         <dependency>
+        <!-- SpringBoot Web容器 -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -75,6 +75,10 @@
         <dependency>
             <groupId>com.magi</groupId>
             <artifactId>nexus-system</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.magi</groupId>
+            <artifactId>nexus-nft</artifactId>
         </dependency>
 
     </dependencies>

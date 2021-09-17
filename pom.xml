@@ -5,14 +5,14 @@
 
     <groupId>com.magi</groupId>
     <artifactId>nexus</artifactId>
-    <version>4.6.2</version>
+    <version>1.0.0</version>
 
     <name>nexus</name>
     <url>http://www.nexus.vip</url>
     <description>Nexus管理系统</description>
     
     <properties>
-        <nexus.version>4.6.2</nexus.version>
+        <nexus.version>1.0.0</nexus.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -97,11 +97,13 @@
             </dependency>
 
             <!-- SpringBoot集成mybatis框架 -->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis-spring-boot.version}</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--    <groupId>org.mybatis.spring.boot</groupId>-->
+            <!--    <artifactId>mybatis-spring-boot-starter</artifactId>-->
+            <!--    <version>${mybatis-spring-boot.version}</version>-->
+            <!--</dependency>-->
+
+
 
             <!-- pagehelper 分页插件 -->
             <dependency>
@@ -210,11 +212,16 @@
                 <artifactId>nexus-system</artifactId>
                 <version>${nexus.version}</version>
             </dependency>
-
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.magi</groupId>
                 <artifactId>nexus-common</artifactId>
+                <version>${nexus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.magi</groupId>
+                <artifactId>nexus-nft</artifactId>
                 <version>${nexus.version}</version>
             </dependency>
 
@@ -228,13 +235,36 @@
         <module>nexus-quartz</module>
         <module>nexus-generator</module>
         <module>nexus-common</module>
-        <module>nexus-bsc</module>
+        <module>nexus-nft</module>
+
+
     </modules>
     <packaging>pom</packaging>
 
 
     <dependencies>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
