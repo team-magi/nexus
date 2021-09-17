@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.magi.nft.mapper.NftListMapper">
+    <resultMap type="NftList" id="NftListResult">
+        <result property="id" column="id"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="deletedAt" column="deleted_at"/>
+        <result property="name" column="name"/>
+        <result property="url" column="url"/>
+        <result property="views" column="views"/>
+        <result property="favorites" column="favorites"/>
+        <result property="details" column="details"/>
+        <result property="sysUserId" column="sys_user_id"/>
+        <result property="sysUserAuthorityId" column="sys_user_authority_id"/>
+        <result property="currentPrice" column="current_price"/>
+        <result property="nftType" column="nft_type"/>
+        <result property="tokenAddress" column="token_address"/>
+        <result property="tokenId" column="token_id"/>
+        <result property="author" column="author"/>
+    </resultMap>
+
+    <sql id="selectNftListVo">
+        select id,
+               created_at,
+               updated_at,
+               deleted_at,
+               name,
+               url,
+               views,
+               favorites,
+               details,
+               sys_user_id,
+               sys_user_authority_id,
+               current_price,
+               nft_type,
+               token_address,
+               token_id,
+               author
+        from nft_list
+    </sql>
+
+    <select id="selectNftListList" parameterType="NftList" resultMap="NftListResult">
+        <include refid="selectNftListVo"/>
+        <where>
+            <if test="createdAt != null">
+                and created_at = #{createdAt}
+            </if>
+            <if test="updatedAt != null">
+                and updated_at = #{updatedAt}
+            </if>
+            <if test="deletedAt != null">
+                and deleted_at = #{deletedAt}
+            </if>
+            <if test="name != null  and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="url != null  and url != ''">
+                and url = #{url}
+            </if>
+            <if test="views != null">
+                and views = #{views}
+            </if>
+            <if test="favorites != null">
+                and favorites = #{favorites}
+            </if>
+            <if test="details != null  and details != ''">
+                and details = #{details}
+            </if>
+            <if test="sysUserId != null">
+                and sys_user_id = #{sysUserId}
+            </if>
+            <if test="sysUserAuthorityId != null  and sysUserAuthorityId != ''">
+                and sys_user_authority_id = #{sysUserAuthorityId}
+            </if>
+            <if test="currentPrice != null">
+                and current_price = #{currentPrice}
+            </if>
+            <if test="nftType != null  and nftType != ''">
+                and nft_type = #{nftType}
+            </if>
+            <if test="tokenAddress != null  and tokenAddress != ''">
+                and token_address = #{tokenAddress}
+            </if>
+            <if test="tokenId != null">
+                and token_id = #{tokenId}
+            </if>
+            <if test="author != null  and author != ''">
+                and author = #{author}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectNftListById" parameterType="Integer" resultMap="NftListResult">
+        <include refid="selectNftListVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertNftList" parameterType="NftList" useGeneratedKeys="true" keyProperty="id">
+        insert into nft_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+            <if test="deletedAt != null">
+                deleted_at,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="views != null">
+                views,
+            </if>
+            <if test="favorites != null">
+                favorites,
+            </if>
+            <if test="details != null">
+                details,
+            </if>
+            <if test="sysUserId != null">
+                sys_user_id,
+            </if>
+            <if test="sysUserAuthorityId != null">
+                sys_user_authority_id,
+            </if>
+            <if test="currentPrice != null">
+                current_price,
+            </if>
+            <if test="nftType != null">
+                nft_type,
+            </if>
+            <if test="tokenAddress != null">
+                token_address,
+            </if>
+            <if test="tokenId != null">
+                token_id,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createdAt != null">
+                #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt},
+            </if>
+            <if test="deletedAt != null">
+                #{deletedAt},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="url != null">
+                #{url},
+            </if>
+            <if test="views != null">
+                #{views},
+            </if>
+            <if test="favorites != null">
+                #{favorites},
+            </if>
+            <if test="details != null">
+                #{details},
+            </if>
+            <if test="sysUserId != null">
+                #{sysUserId},
+            </if>
+            <if test="sysUserAuthorityId != null">
+                #{sysUserAuthorityId},
+            </if>
+            <if test="currentPrice != null">
+                #{currentPrice},
+            </if>
+            <if test="nftType != null">
+                #{nftType},
+            </if>
+            <if test="tokenAddress != null">
+                #{tokenAddress},
+            </if>
+            <if test="tokenId != null">
+                #{tokenId},
+            </if>
+            <if test="author != null">
+                #{author},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateNftList" parameterType="NftList">
+        update nft_list
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createdAt != null">
+                created_at = #{createdAt},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt},
+            </if>
+            <if test="deletedAt != null">
+                deleted_at = #{deletedAt},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="url != null">
+                url = #{url},
+            </if>
+            <if test="views != null">
+                views = #{views},
+            </if>
+            <if test="favorites != null">
+                favorites = #{favorites},
+            </if>
+            <if test="details != null">
+                details = #{details},
+            </if>
+            <if test="sysUserId != null">
+                sys_user_id = #{sysUserId},
+            </if>
+            <if test="sysUserAuthorityId != null">
+                sys_user_authority_id = #{sysUserAuthorityId},
+            </if>
+            <if test="currentPrice != null">
+                current_price = #{currentPrice},
+            </if>
+            <if test="nftType != null">
+                nft_type = #{nftType},
+            </if>
+            <if test="tokenAddress != null">
+                token_address = #{tokenAddress},
+            </if>
+            <if test="tokenId != null">
+                token_id = #{tokenId},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteNftListById" parameterType="Integer">
+        delete
+        from nft_list
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteNftListByIds" parameterType="String">
+        delete
+        from nft_list where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
